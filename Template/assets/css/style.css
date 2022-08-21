@@ -1,0 +1,652 @@
+:root {
+    --bodyColor: #EBECF0;
+    --primaryColor: #0E1F35;
+    --secondarycolor: #F13664;
+    --dangerColor: #f93154;
+    --borderRadius: 1vw;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bodyColor);
+}
+
+.popup {
+    position: fixed;
+    background-color: var(--bodyColor);
+    left: 0;
+    right: 0;
+    top: 1vw;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+    z-index: 90;
+    border-top-right-radius: 1vw;
+    border-top-left-radius: 1vw;
+    overflow: hidden;
+}
+
+.popupHide {
+    transform: translateY(100%);
+}
+
+.popupHeader {
+    display: flex;
+    align-items: center;
+    padding: 0 1vw;
+    background-color: white;
+}
+
+.popupBody {
+    height: 90vh;
+    overflow: auto;
+}
+
+.closePopup .iconify {
+    font-size: 2vw;
+    cursor: pointer;
+    color: var(--primaryColor);
+}
+
+.popupTitle {
+    font-size: 2vw;
+    color: var(--primaryColor);
+    font-weight: bold;
+    margin: 1vw;
+}
+
+.nav {
+    width: 100%;
+    height: 4vw;
+    background-color: var(--primaryColor);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2vw;
+}
+
+.navLogo {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 2vw;
+
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+}
+
+.navLogo span:first-child {
+    color: var(--secondarycolor);
+    padding: 0 0.2vw;
+}
+
+.projectSelect .select2-container {
+    width: auto !important;
+}
+
+.projectSelect .select2-container--default .select2-selection--single {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+
+.projectSelect .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: white;
+}
+
+.projectSelect .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #fff transparent transparent transparent;
+}
+
+.projectGrid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1vw auto;
+}
+
+.projectContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: var(--borderRadius);
+    background-color: white;
+    box-shadow: 1px 1px 5px #dddada;
+    flex-shrink: 0;
+    width: 20vw;
+    height: 20vw;
+    margin: 1vw;
+    position: relative;
+}
+
+.projectContainer:hover {
+    border: 1px solid var(--primaryColor);
+}
+
+.projectInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.projectInfo {
+    text-decoration: none;
+}
+
+.projectInfo .iconify {
+    font-size: 5vw;
+    color: var(--secondarycolor);
+}
+
+.projectInfo h3,
+p {
+    color: var(--primaryColor);
+    margin: 1vw 0;
+
+}
+
+.projectInfo h3 {
+    font-size: 2vw;
+
+}
+
+.projectInfo p {
+    font-size: 1vw;
+}
+
+.apiEdit,
+.projectEdit {
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+    border-radius: 100%;
+    padding: 0.8vw;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primaryColor);
+    border: 1px dashed var(--primaryColor);
+}
+
+.apiEdit:hover,
+.projectEdit:hover {
+    border-style: solid;
+}
+
+.apiEdit {
+    top: 1vw;
+    left: 1vw;
+    right: unset;
+    bottom: unset;
+}
+
+.searchApi,
+.searchProject {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    margin-top: 3vw;
+    margin-bottom: 1vw;
+}
+
+.searchApi {
+    margin: 0;
+    margin-bottom: 1vw;
+}
+
+.projectAdd {
+    width: 3.5vw;
+    height: 3.5vw;
+    border-radius: var(--borderRadius);
+    font-size: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primaryColor);
+    background-color: white;
+    box-shadow: 1px 1px 5px #dddada;
+    margin: 0 1vw;
+    flex-shrink: 0;
+}
+
+.projectAdd:hover {
+    border: 1px solid var(--primaryColor);
+}
+
+.searchApi .cmInputContainer,
+.searchApi .projectAdd {
+    box-shadow: none;
+    border: none;
+}
+
+.searchApi .cmInputContainer {
+    margin: 0 0.2vw;
+}
+
+.searchApi .projectAdd {
+    margin: 0;
+}
+
+.cmInputContainer,
+.cmButton {
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-shadow: 1px 1px 5px #dddada;
+    margin: 1vw 0;
+}
+
+.cmInput,
+.cmButton {
+    border: none;
+    outline: none;
+    font-size: 1vw;
+    height: 3.5vw;
+    border-radius: var(--borderRadius);
+    padding: 0 1vw;
+
+}
+
+
+.cmButton {
+    background-color: var(--primaryColor);
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.cmButton:hover {
+    border-color: var(--secondarycolor);
+}
+
+.cmButton:active {
+    opacity: 0.9;
+}
+
+.cmButtonSecondary {
+    background-color: white;
+    color: var(--primaryColor);
+}
+
+
+
+.cmInputContainer {
+    background-color: white;
+    border-radius: var(--borderRadius);
+}
+
+
+.cmInput {
+    background-color: transparent;
+    color: var(--primaryColor);
+    width: 100%;
+    padding-top: 1.1vw;
+    border: 1px solid transparent;
+
+}
+
+textarea.cmInput {
+    height: auto;
+    padding-top: 1.7vw;
+}
+
+.cmInput:not(:placeholder-shown)+.cmInputLabel,
+.cmInput:focus+.cmInputLabel {
+    top: 0.2vw;
+    font-size: 1vw;
+    color: var(--primaryColor);
+}
+
+.cmInput:focus {
+    border-color: var(--primaryColor);
+}
+
+.cmInputLabel {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1vw;
+    pointer-events: none;
+    top: 1vw;
+    padding: 0 1vw;
+    transition: all 0.2s;
+    color: var(--primaryColor);
+}
+
+.buttonsContainer {
+    display: flex;
+    width: 30vw;
+    margin: 1vw 0;
+}
+
+.buttonsContainer .cmButton {
+    width: 100%;
+    margin: 0 0.2vw;
+}
+
+.cmForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cmForm .success,
+.cmForm .error {
+    padding: 1vw;
+    border-radius: var(--borderRadius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+    margin: 1vw 0;
+}
+
+.cmForm .success {
+    background-color: #019b3f3b;
+    color: #019b3f;
+}
+
+.cmForm .error {
+    background-color: #f9315248;
+    color: #f93154;
+}
+
+[data-invalid-message] {
+    position: absolute;
+    top: 100%;
+    padding: 0 1vw;
+    color: var(--dangerColor);
+    font-size: 0.8vw;
+    font-weight: bold;
+}
+
+.cmSpinner {
+    width: 2vw;
+    height: 2vw;
+    border-radius: 100%;
+    border: 2px solid var(--secondarycolor);
+    border-top-color: transparent;
+    animation: 0.5s spinnerAnimation linear infinite;
+}
+
+@keyframes spinnerAnimation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+
+}
+
+.apiContainer {
+    display: flex;
+}
+
+.apiList,
+.apiInfo {
+    height: 92vh;
+    overflow-y: auto;
+}
+
+.apiList {
+    background-color: var(--primaryColor);
+    width: 20vw;
+    padding: 0.5vw;
+}
+
+.api {
+    color: white;
+    padding: 1vw;
+    display: flex;
+    align-content: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: var(--borderRadius);
+    margin: 0.5vw 0;
+    transition: all 0.3s;
+}
+
+.api .iconify {
+    font-size: 1.7vw;
+}
+
+.api * {
+
+    margin: 0 0.5vw;
+}
+
+.api .iconify {
+    flex-shrink: 0;
+}
+
+.apSelected,
+.api:hover {
+    background-color: var(--secondarycolor);
+    transform: scale(1.01);
+}
+
+.apiInfo {
+    width: 100%;
+    position: relative;
+}
+
+.apiForm {
+    max-width: 50vw;
+    margin: auto;
+}
+
+.apiBodyResponseContainer {
+    display: flex;
+}
+
+.apiBodyResponseContainer .pre {
+    white-space: pre-line;
+    unicode-bidi: embed;
+    overflow: auto;
+    height: 90%;
+
+}
+
+.apiUrlContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apiUrlContainer .cmInputContainer {
+    margin: 0;
+}
+
+.bodyTypeContainer {
+    background-color: white;
+    padding: 1vw;
+    border-radius: var(--borderRadius);
+    box-shadow: 1px 1px 5px #dddada;
+    display: flex;
+    flex-direction: column;
+}
+
+.bodyTypeContainer label {
+    font-size: 1vw;
+    margin-top: -0.5vw;
+    margin-bottom: 0.5vw;
+    color: var(--primaryColor);
+    font-weight: bold;
+}
+
+.bodyTypeOptions {
+    display: flex;
+}
+
+.infoContainer {
+    background-color: white;
+    box-shadow: 1px 1px 5px #dddada;
+    border-radius: var(--borderRadius);
+    padding: 0.8vw;
+    margin: 0.5vw 0;
+    max-height: 300px;
+
+    position: relative;
+}
+
+.copy {
+    position: absolute;
+    top: 0.5vw;
+    right: 0.5vw;
+    cursor: pointer;
+    color: var(--secondarycolor);
+}
+
+.copy .iconify {
+    font-size: 1.5vw;
+}
+
+.infoContainer label {
+    font-size: 1vw;
+    color: var(--primaryColor);
+    font-weight: bold;
+}
+
+.infoContainer div {
+    font-size: 1vw;
+
+
+}
+
+.select2-container {
+    width: 6vw !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--primaryColor);
+    font-weight: bold;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: var(--secondarycolor);
+}
+
+.select2-container--default .select2-selection--single {
+    height: 3.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: var(--borderRadius);
+    box-shadow: 1px 1px 5px #dddada;
+
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 10px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field{
+    border-radius: var(--borderRadius);
+}
+.fullWidth {
+    width: 100% !important;
+}
+
+[readonly] {
+    pointer-events: none;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.3vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 100%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondarycolor);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
+
+@media screen and (max-width:1000px) {}
+
+@media screen and (max-width:600px) {
+    .nav {
+        height: 10vw;
+    }
+
+    .projectGrid {
+        flex-direction: column;
+    }
+
+    .projectContainer {
+        width: 80vw;
+        height: 50vw;
+    }
+
+    .projectContainer .iconify {
+        font-size: 10vw;
+    }
+
+    .projectContainer h3 {
+        font-size: 10vw;
+    }
+
+    .projectContainer p {
+        font-size: 5vw;
+    }
+
+    .projectEdit .iconify {
+        font-size: 5vw;
+    }
+
+    .cmInputContainer {
+        width: 80vw;
+    }
+
+    .cmInput {
+        height: 8.5vw;
+        font-size: 4vw;
+    }
+
+    .cmInputLabel {
+        font-size: 4vw;
+    }
+
+}
