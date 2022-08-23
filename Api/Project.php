@@ -1,15 +1,35 @@
 <?php
 
 include_once __DIR__ . "../../Helpers/DB.php";
-class ProjectModel
+class Project
 {
     public static $dbTable = "project";
+
+
+    public function __construct()
+    {
+        if (isset($_REQUEST["action"])) {
+            $response = [];
+            $action = $_REQUEST["action"];
+            if ($action == "insert") {
+                $response = self::insert($_POST);
+            } else  if ($action == "update") {
+                $response = self::update($_POST);
+            } else if ($action == "delete") {
+                $response = self::delete();
+            } else if ($action == "select") {
+                $response = self::select($_POST);
+            }
+
+            echo json_encode($response);
+        }
+    }
 
     public static function select($project = [])
     {
         $condition = "";
         $params = [];
-        if (isset($project['project_id']) != null) {
+        if (isset($project['project_id'])) {
             $condition = " and project.project_id=:project_id ";
             $params["project_id"] = $project['project_id'];
         }
@@ -49,6 +69,7 @@ class ProjectModel
         if ($result > 0) {
             $response["status"] = "success";
             $response["message"] = "Inserted Successfully";
+            $response["id"] = $result;
         }
         return $response;
     }
@@ -77,6 +98,7 @@ class ProjectModel
         if ($result >= 0) {
             $response["status"] = "success";
             $response["message"] = "Updated Successfully";
+            $response["id"] = $_SESSION["project_id"];
         }
         return $response;
     }
@@ -97,7 +119,10 @@ class ProjectModel
         if ($result > 0) {
             $response["status"] = "success";
             $response["message"] = "Deleted Successfullt";
+            $response["id"] = $_SESSION["project_id"];
         }
         return $response;
     }
 }
+
+new Project();

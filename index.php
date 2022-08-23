@@ -1,22 +1,60 @@
 <?php
-$showProjectCombo=false;
+$showProjectCombo = false;
 include_once "Template/nav.php";
+$projects = Utils::api("Project");
 ?>
-<div id="jsProjects">
-    <?php include_once "Template/projects.php"; ?>
+<div id="jsProjects" class="contentcontainer">
+    <div class="searchProject">
+        <a data-popup data-popup-title="Add Project" class="projectAdd" href="Template/add_project.php">
+            <span class="iconify" data-icon="carbon:add"></span>
+        </a>
+        <div class="cmInputContainer">
+            <input type="text" id="jsSearchProject" class="cmInput" placeholder=" ">
+            <label class="cmInputLabel">Search...</label>
+        </div>
+
+    </div>
+
+    
+
+
+    <div id="jsProjectGrid" class="projectGrid">
+        <?php
+        foreach ($projects as $project) {
+            include "Template/project.php";
+        }
+
+        ?>
+    </div>
+
+
+
 </div>
 
-<?php
-include_once "Template/footer.php";
-
-
-?>
-
 <script>
+ 
+
+    
     $(function() {
-        $("#jsClosePopup").on("mousedown", function(e) {
-            e.preventDefault();
-            load("#jsProjects", "Template/projects.php");
-        });
+
+        $("#jsSearchProject").on("input", function() {
+            let searchValue = $(this).val().trim();
+            if (searchValue == "") {
+                $(".jsProjectContainer").fadeIn();
+                return;
+            }
+            $.each($(".jsProjectContainer"), function(index, element) {
+                let apiTitle = $(element).find(".jsProjectTitle").html().toLowerCase();
+                if (apiTitle.includes(searchValue)) {
+                    $(element).fadeIn();
+                } else {
+                    $(element).hide();
+                }
+
+            });
+        })
     });
 </script>
+<?php
+include_once "Template/footer.php";
+?>

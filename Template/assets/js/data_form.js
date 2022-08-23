@@ -149,6 +149,7 @@ function ajaxFormSubmitEventBinding() {
 
             messages.forEach(message => {
                 message.innerHTML = "";
+                message.className="";
                 
             });
 

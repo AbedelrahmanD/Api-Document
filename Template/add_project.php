@@ -10,7 +10,8 @@ $record = [
 $fetchedRecord = null;
 
 if (isset($_GET["project_id"])) {
-    $fetchedRecord = ProjectModel::select(["project_id" => $_GET["project_id"]]);
+    $fetchedRecord = Utils::api("Project", ["project_id" => $_GET["project_id"]]);
+
     if ($fetchedRecord != null) {
         $record = $fetchedRecord[0];
         $formAction = "update";
@@ -21,7 +22,7 @@ if (isset($_GET["project_id"])) {
 
 ?>
 
-<form class="cmForm" id="jsProjectForm" action="Api/ProjectApi.php?action=<?= $formAction ?>" method="post" data-form="resetForm">
+<form class="cmForm" id="jsProjectForm" action="Api/Project.php?action=<?= $formAction ?>" method="post" data-form="projectFormSubmitDone">
 
     <div data-form-message></div>
     <div class="cmInputContainer">
@@ -56,27 +57,38 @@ if (isset($_GET["project_id"])) {
 
 </form>
 
+
 <script>
-    function resetForm(response) {
-        if (response.status != "success") {
-            return;
-        }
-        if (response.action == "insert") {
-            $("#jsProjectForm").trigger("reset");
-        } else {
-
-            $("#jsClosePopup").trigger("mousedown").trigger("click");
-        }
-    }
-
     function deleteRecord() {
         if (!confirm("Confirm Delete")) {
             return;
         }
-        $.get("Api/ProjectApi.php?action=delete",
+        $.get("Api/Project.php?action=delete",
             function(data, textStatus, jqXHR) {
-                resetForm(JSON.parse(data));
+                data = JSON.parse(data);
+                $(`#jsProject_${data.id}`).remove();
+                $("#jsClosePopup").trigger("click");
             },
         );
+    }
+
+    function projectFormSubmitDone(data) {
+        if (data.status != "success") {
+            return;
+        }
+
+        $.get(`Template/project.php?project_id=${data.id}`, function(html) {
+            if (data.action == "update") {
+                $(`#jsProject_${data.id}`).replaceWith(html);
+            } else {
+                $("#jsProjectForm").trigger("reset");
+                $("#jsProjectGrid").prepend(html);
+            }
+            setTimeout(() => {
+                $("#jsClosePopup").trigger("click");
+            }, 500);
+
+        });
+
     }
 </script>

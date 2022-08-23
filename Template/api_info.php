@@ -3,7 +3,7 @@
 include_once __DIR__ . "./../autoload_register.php";
 
 if (isset($_GET["api_id"])) {
-    $fetchedRecord = ApiModel::select(["api_id" => $_GET["api_id"]]);
+    $fetchedRecord = Utils::api("Api",["api_id" => $_GET["api_id"]]);
     if ($fetchedRecord != null) {
         $record = $fetchedRecord[0];
     }

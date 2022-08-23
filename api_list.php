@@ -1,18 +1,43 @@
 <?php
+$showProjectCombo = true;
+include_once "Template/nav.php";
 if (!isset($_GET['project_id'])) {
     header("location: index.php");
 }
 session_start();
-$_SESSION["project_id"] = $_GET['project_id'];
-$showProjectCombo = true;
-include_once "Template/nav.php";
+$project = Utils::api("Project", ["project_id" => $_GET["project_id"]])[0];
+$apis = Utils::api("Api", ["project_id" => $_GET["project_id"]]);
+
+$_SESSION["project_id"] = $project["project_id"];
+
 ?>
 
-<div class="apiContainer">
+<div class="apiContainer contentcontainer">
 
-    <div id="jsSidebar">
-        <?php include_once "Template/sidebar.php"; ?>
-    </div>
+    
+
+
+        <div class="apiList">
+            <div class="searchApi">
+                <a data-popup data-popup-title="Add Api For <?= $project['project_title'] ?>" class="projectAdd" href="Template/add_api.php?project_id=<?= $project['project_id'] ?>">
+                    <span class="iconify" data-icon="carbon:add"></span>
+                </a>
+                <div class="cmInputContainer">
+                    <input type="text" id="jsSearchApi" class="cmInput" placeholder=" ">
+                    <label class="cmInputLabel">Search...</label>
+                </div>
+
+            </div>
+
+            <div id="jsApiList">
+                <?php
+                foreach ($apis as $api) {
+                    include "Template/api.php";
+                }
+                ?>
+            </div>
+            </div>
+
 
 
     <div id="jsApiInfo" class="apiInfo">
@@ -21,6 +46,7 @@ include_once "Template/nav.php";
 
 </div>
 
+
 <script>
     function triggerFirstApi() {
         let apis = $(".jsApi");
@@ -28,26 +54,45 @@ include_once "Template/nav.php";
             $(apis[0]).trigger("click");
         }
     }
+
     $(function() {
 
-        triggerFirstApi();
-        $("#jsClosePopup").on("mousedown", function(e) {
+        $(document).on("click", ".jsApi", function(e) {
             e.preventDefault();
-            load("#jsSidebar", "Template/sidebar.php?project_id=<?= $project['project_id'] ?>", () => {
-                let selectedApiElement = sessionStorage.getItem("selectedApiElement");
+            let apiId = $(this).attr("data-api_id");
+            $("#jsApiInfo").load(`Template/api_info.php?api_id=${apiId}&isReadOnly=true`, function(response, status, request) {
 
-                setTimeout(() => {
-
-                    if ($(selectedApiElement).length) {
-                        $(selectedApiElement).trigger("click");
-                    } else {
-                        triggerFirstApi();
-                    }
-
-                }, 200);
             });
 
+            $(`.jsApi`).removeClass("apSelected");
+            $(`[data-api_id=${apiId}]`).addClass("apSelected");
+
+
         });
+
+
+        $("#jsSearchApi").on("input", function() {
+            let searchValue = $(this).val().trim();
+            if (searchValue == "") {
+                $(".jsApi").fadeIn();
+                return;
+            }
+            $.each($(".jsApi"), function(index, element) {
+                let apiTitle = $(element).find(".jsApiTitle").html().toLowerCase();
+                if (apiTitle.includes(searchValue)) {
+                    $(element).fadeIn();
+                } else {
+                    $(element).hide();
+                }
+
+            });
+        })
+
+
+
+
+        triggerFirstApi();
+
     });
 </script>
 

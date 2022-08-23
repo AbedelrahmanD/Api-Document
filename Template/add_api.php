@@ -20,7 +20,7 @@ $fetchedRecord = null;
 
 if (isset($_GET["api_id"])) {
 
-    $fetchedRecord = ApiModel::select(["api_id" => $_GET["api_id"]]);
+    $fetchedRecord = Utils::api("Api", ["api_id" => $_GET["api_id"]]);
     if ($fetchedRecord != null) {
         $record = $fetchedRecord[0];
         $formAction = "update";
@@ -35,7 +35,7 @@ if (isset($_GET["isReadOnly"])) {
 ?>
 
 
-<form class="cmForm apiForm" id="jsApiForm" action="Api/DocApi.php?action=<?= $formAction ?>" method="post" data-form="resetForm">
+<form class="cmForm apiForm" id="jsApiForm" action="Api/Api.php?action=<?= $formAction ?>" method="post" data-form="apiFormSubmitDone">
     <div data-form-message></div>
     <!-- <div style="display: none;">
         <select name="project_id" class="fullWidth">
@@ -74,6 +74,7 @@ if (isset($_GET["isReadOnly"])) {
         <label for="body_type">Body Type</label>
         <div class="bodyTypeOptions">
             <input <?= $readOnly ?> type="radio" value="FormData" name="api_body_type" <?= $record['api_body_type'] == "FormData" ? 'checked' : '' ?>>FormData
+            &nbsp;
             <input <?= $readOnly ?> type="radio" value="json" name="api_body_type" <?= $record['api_body_type'] == "json" ? 'checked' : '' ?>>Json
         </div>
     </div>
@@ -109,27 +110,43 @@ if (isset($_GET["isReadOnly"])) {
 
 </form>
 
-
 <script>
-    function resetForm(response) {
-        if (response.status != "success") {
-            return;
-        }
-        if (response.action == "insert") {
-            $("#jsApiForm").trigger("reset");
-        } else {
-            $("#jsClosePopup").trigger("mousedown").trigger("click");
-        }
-    }
-
     function deleteRecord() {
         if (!confirm("Confirm Delete")) {
             return;
         }
-        $.get("Api/DocApi.php?action=delete",
+        $.get("Api/Api.php?action=delete",
             function(data, textStatus, jqXHR) {
-                resetForm(JSON.parse(data));
+                data = JSON.parse(data);
+                $(`#jsApi_${data.id}`).remove();
+                $("#jsClosePopup").trigger("click");
+                triggerFirstApi();
             },
         );
+    }
+
+    function apiFormSubmitDone(data) {
+        if (data.status != "success") {
+            return;
+        }
+        $.get(`Template/api.php?api_id=${data.id}`, function(html) {
+            if (data.action == "update") {
+
+
+                $(`#jsApi_${data.id}`).replaceWith(html);
+                $(`#jsApi_${data.id}`).trigger("click");
+                setTimeout(() => {
+                    $("#jsClosePopup").trigger("click");
+
+                }, 500);
+
+            } else {
+                $("#jsApiForm").trigger("reset");
+                $("#jsApiList").prepend(html);
+
+            }
+
+        });
+
     }
 </script>

@@ -24,6 +24,7 @@
                 callBack();
             }
         });
+
     }
     $(function() {
         initLibraries();

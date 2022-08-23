@@ -11,10 +11,15 @@
     font-family: 'Roboto', sans-serif;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    height: 100%;
     margin: 0;
     padding: 0;
     background-color: var(--bodyColor);
@@ -25,7 +30,7 @@ body {
     background-color: var(--bodyColor);
     left: 0;
     right: 0;
-    top: 1vw;
+    top: 0.5rem;
     bottom: 0;
     width: 100%;
     height: 100%;
@@ -48,7 +53,7 @@ body {
 }
 
 .popupBody {
-    height: 90vh;
+    height: 100%;
     overflow: auto;
 }
 
@@ -67,7 +72,7 @@ body {
 
 .nav {
     width: 100%;
-    height: 4vw;
+    height: 10%;
     background-color: var(--primaryColor);
     position: sticky;
     top: 0;
@@ -94,9 +99,12 @@ body {
     padding: 0 0.2vw;
 }
 
-.projectSelect .select2-container {
-    width: auto !important;
+.projectSelect {
+    display: flex;
+    align-items: center;
 }
+
+
 
 .projectSelect .select2-container--default .select2-selection--single {
     box-shadow: none;
@@ -171,6 +179,11 @@ p {
 
 .projectInfo p {
     font-size: 1vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .apiEdit,
@@ -367,6 +380,25 @@ textarea.cmInput {
     font-size: 1.5vw;
     font-weight: bold;
     margin: 1vw 0;
+    animation: 0.3s slideanimation ease-in-out alternate;
+    position: fixed;
+    max-width: 300px;
+    margin: auto;
+    top: 0.8rem;
+    z-index: 50;
+}
+
+@keyframes slideanimation {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
 }
 
 .cmForm .success {
@@ -408,13 +440,18 @@ textarea.cmInput {
 
 }
 
+.contentcontainer {
+    height: 90%;
+}
+
 .apiContainer {
     display: flex;
+
 }
 
 .apiList,
 .apiInfo {
-    height: 92vh;
+    height: 100%;
     overflow-y: auto;
 }
 
@@ -544,7 +581,12 @@ textarea.cmInput {
 }
 
 .select2-container {
-    width: 6vw !important;
+    width: auto !important;
+}
+
+.select2-container--open .select2-dropdown {
+    left: -260px;
+    min-width: 300px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -571,9 +613,10 @@ textarea.cmInput {
     top: 10px;
 }
 
-.select2-container--default .select2-search--dropdown .select2-search__field{
+.select2-container--default .select2-search--dropdown .select2-search__field {
     border-radius: var(--borderRadius);
 }
+
 .fullWidth {
     width: 100% !important;
 }
@@ -606,47 +649,4 @@ textarea.cmInput {
 
 @media screen and (max-width:1000px) {}
 
-@media screen and (max-width:600px) {
-    .nav {
-        height: 10vw;
-    }
-
-    .projectGrid {
-        flex-direction: column;
-    }
-
-    .projectContainer {
-        width: 80vw;
-        height: 50vw;
-    }
-
-    .projectContainer .iconify {
-        font-size: 10vw;
-    }
-
-    .projectContainer h3 {
-        font-size: 10vw;
-    }
-
-    .projectContainer p {
-        font-size: 5vw;
-    }
-
-    .projectEdit .iconify {
-        font-size: 5vw;
-    }
-
-    .cmInputContainer {
-        width: 80vw;
-    }
-
-    .cmInput {
-        height: 8.5vw;
-        font-size: 4vw;
-    }
-
-    .cmInputLabel {
-        font-size: 4vw;
-    }
-
-}
+@media screen and (max-width:600px) {}

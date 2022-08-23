@@ -1,11 +1,31 @@
 <?php
-
-class ApiModel
+include_once __DIR__ . "../../Helpers/DB.php";
+class Api
 {
     public static $dbTable = "api";
 
+
+    public function __construct()
+    {
+        if (isset($_REQUEST["action"])) {
+            $response = [];
+            $action = $_REQUEST["action"];
+            if ($action == "insert") {
+                $response = self::insert($_POST);
+            } else  if ($action == "update") {
+                $response = self::update($_POST);
+            } else if ($action == "delete") {
+                $response = self::delete();
+            } else if ($action == "select") {
+                $response = self::select($_POST);
+            }
+
+            echo json_encode($response);
+        }
+    }
     public static function select($api = null)
     {
+      
         $condition = "";
         $params = [];
         if (isset($api["api_id"])) {
@@ -45,20 +65,21 @@ class ApiModel
             "message" => "Error, Try Again Later",
             "action" => "insert",
         ];
-        $api["project_id"]=$_SESSION["project_id"];
+        $api["project_id"] = $_SESSION["project_id"];
         if (self::isTitleExists([
             "api_title" => $api["api_title"],
             "project_id" => $api["project_id"]
-            ])) {
+        ])) {
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;
         }
-      
+
         $result = DB::insert(self::$dbTable, $api);
         if ($result > 0) {
             $response["status"] = "success";
             $response["message"] = "Inserted Successfully";
+            $response["id"] = $result;
         }
         return $response;
     }
@@ -71,7 +92,7 @@ class ApiModel
             "message" => "Error, Try Again Later",
             "action" => "update",
         ];
-        $api["project_id"]=$_SESSION["project_id"];
+        $api["project_id"] = $_SESSION["project_id"];
         if (self::isTitleExists([
             "api_title" => $api["api_title"],
             "api_id_diff" => $_SESSION["api_id"],
@@ -89,6 +110,7 @@ class ApiModel
         if ($result >= 0) {
             $response["status"] = "success";
             $response["message"] = "Updated Successfully";
+            $response["id"] = $_SESSION["api_id"];
         }
         return $response;
     }
@@ -109,7 +131,10 @@ class ApiModel
         if ($result > 0) {
             $response["status"] = "success";
             $response["message"] = "Deleted Successfullt";
+            $response["id"] = $_SESSION["api_id"];
         }
         return $response;
     }
 }
+
+new Api();

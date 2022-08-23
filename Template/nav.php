@@ -2,15 +2,19 @@
 
 include_once "header.php";
 include_once __DIR__ . "./../autoload_register.php";
-$projects = ProjectModel::select();
+
+
+
 
 ?>
-<nav class="nav">
+<div class="nav">
     <a class="navLogo" href="index.php">
         <span>Api</span>
         <span>Document</span>
     </a>
-    <?php if ($showProjectCombo) : ?>
+    <?php if ($showProjectCombo) {
+        $projects = Utils::api("Project");
+    ?>
         <div class="projectSelect">
             <select id="jsProjectId">
                 <?php foreach ($projects as $project) : ?>
@@ -18,8 +22,8 @@ $projects = ProjectModel::select();
                 <?php endforeach; ?>
             </select>
         </div>
-    <?php endif; ?>
-</nav>
+    <?php } ?>
+</div>
 
 <script>
     $(function() {

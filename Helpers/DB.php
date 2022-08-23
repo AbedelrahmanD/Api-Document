@@ -13,7 +13,7 @@ class DB
         return $conn;
     }
 
-    public static function execute($query = "", $bindParams = [])
+    public static function execute($query = "", $bindParams = [], $getInsertedId = false)
     {
 
         $conn = DB::getConnection();
@@ -21,14 +21,18 @@ class DB
         foreach ($bindParams as $key => $param) {
             $stmt->bindParam(":$key", $bindParams["$key"]);
         }
-        
-        return $stmt->execute();
+
+        $result = $stmt->execute();
+        if ($getInsertedId) {
+            return $conn->lastInsertId();
+        }
+        return $result;
     }
 
 
     public static function delete($tableName, $where = [])
     {
-        
+
         $deleteWhere = [];
         foreach ($where as $field => $value) {
             $deleteWhere[] = "$field=:$field";
@@ -53,9 +57,10 @@ class DB
         $updateCondition = implode("and", $updateCondition);
 
         $query = "update  $tableName set $fields where 1 and $updateCondition";
-        
-        return self::execute($query, array_merge($params,$where));
+
+        return self::execute($query, array_merge($params, $where));
     }
+
     public static function insert($tableName, $params = [])
     {
         $fields = [];
@@ -68,7 +73,7 @@ class DB
         $values = implode(",", $values);
         $query = "insert into $tableName ($fields) values ($values)";
 
-        return self::execute($query,$params);
+        return self::execute($query, $params,true);
     }
 
     public static function select($query = "", $bindParams = [])
