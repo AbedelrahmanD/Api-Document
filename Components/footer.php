@@ -31,13 +31,13 @@
         $(document).on('click', "[data-copy]", function(event) {
             let input = document.createElement("input");
             input.value = $(this).attr("data-copy");
-            input.id = "jsCopy"
+            input.className = "jsCopy"
             $("body").append(input);
-            var copyText = $("#jsCopy")[0];
+            var copyText = $(".jsCopy")[$(".jsCopy").length-1];
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(copyText.value);
-            $("#jsCopy").remove();
+            $(".jsCopy").remove();
         });
 
         $(document).on('keydown', function(event) {

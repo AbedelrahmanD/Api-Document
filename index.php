@@ -1,11 +1,11 @@
 <?php
 $showProjectCombo = false;
-include_once "Template/nav.php";
+include_once "Components/nav.php";
 $projects = Utils::api("Project");
 ?>
 <div id="jsProjects" class="contentcontainer">
     <div class="searchProject">
-        <a data-popup data-popup-title="Add Project" class="projectAdd" href="Template/add_project.php">
+        <a data-popup data-popup-title="Add Project" class="projectAdd" href="Components/add_project.php">
             <span class="iconify" data-icon="carbon:add"></span>
         </a>
         <div class="cmInputContainer">
@@ -21,7 +21,7 @@ $projects = Utils::api("Project");
     <div id="jsProjectGrid" class="projectGrid">
         <?php
         foreach ($projects as $project) {
-            include "Template/project.php";
+            include "Components/project.php";
         }
 
         ?>
@@ -56,5 +56,5 @@ $projects = Utils::api("Project");
     });
 </script>
 <?php
-include_once "Template/footer.php";
+include_once "Components/footer.php";
 ?>

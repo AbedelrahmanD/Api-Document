@@ -39,7 +39,6 @@ if (isset($_GET["project_id"])) {
 
 
 
-
     <?php if ($fetchedRecord == null) : ?>
         <button class="cmButton" type="submit">Submit</button>
 
@@ -49,9 +48,9 @@ if (isset($_GET["project_id"])) {
             <button class="cmButton cmButtonSecondary" onclick="deleteRecord()" type="button">Delete</button>
         </div>
     <?php endif; ?>
-    <center>
-        <div data-form-loader class="cmSpinner"></div>
-    </center>
+    <div class="cmSpinnerContainer" data-form-loader>
+        <div class="cmSpinner"></div>
+    </div>
 
 
 
@@ -77,7 +76,7 @@ if (isset($_GET["project_id"])) {
             return;
         }
 
-        $.get(`Template/project.php?project_id=${data.id}`, function(html) {
+        $.get(`Components/project.php?project_id=${data.id}`, function(html) {
             if (data.action == "update") {
                 $(`#jsProject_${data.id}`).replaceWith(html);
             } else {

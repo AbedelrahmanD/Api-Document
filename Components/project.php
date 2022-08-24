@@ -21,7 +21,7 @@ title=" <?= $project['project_description'] ?>"
         </p>
     </a>
 
-    <a class="projectEdit" data-project_id=<?= $project["project_id"] ?> data-popup data-popup-title="Edit <?= $project['project_title'] ?>" href="Template/update_project.php?project_id=<?= $project['project_id'] ?>">
+    <a class="projectEdit" data-project_id=<?= $project["project_id"] ?> data-popup data-popup-title="Edit <?= $project['project_title'] ?>" href="Components/add_project.php?project_id=<?= $project['project_id'] ?>">
         <span class="iconify" data-icon="fa-solid:pen"></span>
     </a>
 </div>

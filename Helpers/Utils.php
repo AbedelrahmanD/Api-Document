@@ -3,6 +3,7 @@
 class Utils
 {
     public static $basicUrl="http://localhost/github/API-Document-V2/";
+    
     public static function api($apiFile, $data = [])
     {
         if (!isset($data["action"])) {

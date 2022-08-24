@@ -185,7 +185,7 @@ p {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-
+.apiTry,
 .apiEdit,
 .projectEdit {
     position: absolute;
@@ -200,7 +200,7 @@ p {
     color: var(--primaryColor);
     border: 1px dashed var(--primaryColor);
 }
-
+.apiTry:hover,
 .apiEdit:hover,
 .projectEdit:hover {
     border-style: solid;
@@ -212,7 +212,12 @@ p {
     right: unset;
     bottom: unset;
 }
-
+.apiTry{
+    top: 5vw;
+    left: 1vw;
+    right: unset;
+    bottom: unset;
+}
 .searchApi,
 .searchProject {
     width: 100%;
@@ -327,6 +332,9 @@ p {
 textarea.cmInput {
     height: auto;
     padding-top: 1.7vw;
+    height: 83%;
+    border: none;
+  
 }
 
 .cmInput:not(:placeholder-shown)+.cmInputLabel,
@@ -419,23 +427,40 @@ textarea.cmInput {
     font-size: 0.8vw;
     font-weight: bold;
 }
-
+.cmSpinnerContainer{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.301);
+    
+}
 .cmSpinner {
-    width: 2vw;
+    /* width: 2vw;
     height: 2vw;
     border-radius: 100%;
     border: 2px solid var(--secondarycolor);
     border-top-color: transparent;
+    animation: 0.5s spinnerAnimation linear infinite; */
+    position: fixed;
+    top: 4.5rem;
+    height: 0.2rem;
+    background-color: var(--secondarycolor);
+    width: 50vw;
+    left: 0;
     animation: 0.5s spinnerAnimation linear infinite;
+
+
 }
 
 @keyframes spinnerAnimation {
     0% {
-        transform: rotateZ(0deg);
+        transform: translateX(-20vw);
     }
 
     100% {
-        transform: rotateZ(360deg);
+       transform: translateX(100vw);
     }
 
 }
@@ -498,7 +523,7 @@ textarea.cmInput {
 }
 
 .apiForm {
-    max-width: 50vw;
+    max-width: 70vw;
     margin: auto;
 }
 
@@ -510,7 +535,7 @@ textarea.cmInput {
     white-space: pre-line;
     unicode-bidi: embed;
     overflow: auto;
-    height: 90%;
+  
 
 }
 
@@ -518,6 +543,7 @@ textarea.cmInput {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .apiUrlContainer .cmInputContainer {
@@ -552,8 +578,13 @@ textarea.cmInput {
     padding: 0.8vw;
     margin: 0.5vw 0;
     max-height: 300px;
-
     position: relative;
+    overflow: auto;
+}
+
+.infoContainer div {
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .copy {
@@ -584,7 +615,7 @@ textarea.cmInput {
     width: auto !important;
 }
 
-.select2-container--open .select2-dropdown {
+.projectSelect .select2-container--open .select2-dropdown {
     left: -260px;
     min-width: 300px;
 }
@@ -592,6 +623,7 @@ textarea.cmInput {
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: var(--primaryColor);
     font-weight: bold;
+    font-size: 1vw;
 }
 
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
@@ -621,6 +653,11 @@ textarea.cmInput {
     width: 100% !important;
 }
 
+.w50 {
+    width: 50% !important;
+}
+
+
 [readonly] {
     pointer-events: none;
 }
@@ -629,6 +666,7 @@ textarea.cmInput {
 /* width */
 ::-webkit-scrollbar {
     width: 0.3vw;
+    height: 0.3vw;
 }
 
 /* Track */
@@ -642,10 +680,6 @@ textarea.cmInput {
     border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: white;
-}
 
 @media screen and (max-width:1000px) {}
 

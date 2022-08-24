@@ -64,7 +64,7 @@ if (isset($_GET["isReadOnly"])) {
     </div>
 
     <div class="cmInputContainer fullWidth">
-        <textarea <?= $readOnly ?> class="cmInput" name="api_header" cols="30" rows="2" placeholder=" "><?= $record['api_header'] ?></textarea>
+        <textarea <?= $readOnly ?> class="cmInput" name="api_header" cols="30" rows="5" placeholder=" "><?= $record['api_header'] ?></textarea>
         <label class="cmInputLabel">Header</label>
     </div>
 
@@ -95,7 +95,13 @@ if (isset($_GET["isReadOnly"])) {
 
     </div>
 
-    <?php if ($fetchedRecord == null) : ?>
+    <?php
+
+    if (isset($_GET["action"]) && $_GET["action"] == "try") :
+    ?>
+        <button onclick="tryApi()" class="cmButton" type="button">Try</button>
+
+    <?php elseif ($fetchedRecord == null) : ?>
         <button class="cmButton fullWidth" type="submit">Submit</button>
     <?php else : ?>
         <div class="buttonsContainer">
@@ -103,14 +109,49 @@ if (isset($_GET["isReadOnly"])) {
             <button class="cmButton cmButtonSecondary" onclick="deleteRecord()" type="button">Delete</button>
         </div>
     <?php endif; ?>
-    <center>
-        <div data-form-loader class="cmSpinner"></div>
-    </center>
+    <div class="cmSpinnerContainer" data-form-loader>
+        <div class="cmSpinner"></div>
+    </div>
 
 
 </form>
 
 <script>
+    function tryApi() {
+        let url = $("[name=api_url]").val();
+        let method = $("[name=api_method]").val();
+        let headers= $("[name=api_header]").val();
+        let body = $("[name=api_body]").val();
+        let type = $("[name=api_body_type]:checked").val();
+        let contentType="application/json";
+        if (type == "FormData" && body!="") {
+            body = JSON.parse(body);
+            contentType=false;
+        }
+        if(headers!=""){
+            headers=JSON.parse(headers);
+        }
+        $("[data-form-loader]").show();
+        $.ajax({
+            type: method,
+            url: url,
+            headers:headers,
+            data: body,
+            // contentType:contentType,
+            // processData:false,
+            success: function(response) {
+                $("[name=api_response]").val(JSON.stringify(response, null, 2));
+                $("[data-form-loader]").hide();
+
+            },
+            error: function(request, status, error) {
+                alert(request.responseText);
+                $("[data-form-loader]").hide();
+            }
+        });
+
+    }
+
     function deleteRecord() {
         if (!confirm("Confirm Delete")) {
             return;
@@ -129,7 +170,7 @@ if (isset($_GET["isReadOnly"])) {
         if (data.status != "success") {
             return;
         }
-        $.get(`Template/api.php?api_id=${data.id}`, function(html) {
+        $.get(`Components/api.php?api_id=${data.id}`, function(html) {
             if (data.action == "update") {
 
 
