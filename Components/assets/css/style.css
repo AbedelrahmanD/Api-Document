@@ -102,6 +102,7 @@ body {
 .projectSelect {
     display: flex;
     align-items: center;
+    display: none;
 }
 
 
@@ -614,6 +615,9 @@ textarea.cmInput {
 .select2-container {
     width: auto !important;
 }
+.projectSelect .select2-container {
+    width: 200px !important;
+}
 
 .projectSelect .select2-container--open .select2-dropdown {
     left: -260px;
@@ -646,7 +650,10 @@ textarea.cmInput {
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
-    border-radius: var(--borderRadius);
+    border-radius: 8px;
+}
+.select2-container--open .select2-dropdown--below{
+    border-radius: 8px;
 }
 
 .fullWidth {

@@ -15,6 +15,7 @@
     function initLibraries() {
         initDataForm();
         $('select').select2();
+        $(".projectSelect").css("display","flex");
     }
 
     function load(target, url, callBack = null) {

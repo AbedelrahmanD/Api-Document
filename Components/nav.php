@@ -9,7 +9,7 @@ include_once __DIR__ . "./../autoload_register.php";
 ?>
 <div class="nav">
     <a class="navLogo" href="index.php">
-        <span>Api</span>
+        <span>API</span>
         <span>Document</span>
     </a>
     <?php if ($showProjectCombo) {

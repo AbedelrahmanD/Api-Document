@@ -2,6 +2,7 @@
 $showProjectCombo = false;
 include_once "Components/nav.php";
 $projects = Utils::api("Project");
+
 ?>
 <div id="jsProjects" class="contentcontainer">
     <div class="searchProject">
