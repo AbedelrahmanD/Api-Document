@@ -1,6 +1,6 @@
 <?php
 $showProjectCombo = true;
-include_once "Components/nav.php";
+include_once "Template/nav.php";
 if (!isset($_GET['project_id'])) {
     header("location: index.php");
 }
@@ -93,5 +93,5 @@ $_SESSION["project_id"] = $project["project_id"];
 
 
 <?php
-include_once "Components/footer.php";
+include_once "Template/footer.php";
 ?>

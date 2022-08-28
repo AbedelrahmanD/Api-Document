@@ -121,7 +121,7 @@ function ajaxFormSubmitEventBinding() {
                 return;
             }
 
-            let action = form.action;
+            let action = form.getAttribute("action");
             let method = form.method;
             let formData = new FormData(form);
             let fetchOptions = {
