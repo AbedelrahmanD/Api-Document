@@ -48,10 +48,6 @@ class Project
         return  DB::select($query, $params);
     }
 
-    public static function isTitleExists($project)
-    {
-        return count(self::select($project));
-    }
     public static function insert($project)
     {
         $response = [
@@ -60,7 +56,8 @@ class Project
             "action" => "insert",
         ];
 
-        if (self::isTitleExists(["project_title" => $project["project_title"]])) {
+
+        if (DB::isExists("project", ["project_title" => $project["project_title"]])) {
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;
@@ -83,10 +80,12 @@ class Project
             "message" => "Error, Try Again Later",
             "action" => "update",
         ];
-        if (self::isTitleExists([
-            "project_title" => $project["project_title"],
-            "project_id_diff" => $_SESSION["project_id"],
-        ])) {
+        if (DB::isExists(
+            "project",
+            ["project_title" => $project["project_title"]],
+            ["project_id" => $_SESSION["project_id"]],
+        )) {
+
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;

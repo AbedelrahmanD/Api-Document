@@ -1,4 +1,5 @@
 <?php
+
 $showProjectCombo = false;
 include_once "Template/nav.php";
 $projects = Utils::api("Project");
@@ -57,5 +58,6 @@ $projects = Utils::api("Project");
     });
 </script>
 <?php
+
 include_once "Template/footer.php";
 ?>

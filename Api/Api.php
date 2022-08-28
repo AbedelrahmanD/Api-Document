@@ -25,7 +25,7 @@ class Api
     }
     public static function select($api = null)
     {
-      
+
         $condition = "";
         $params = [];
         if (isset($api["api_id"])) {
@@ -53,10 +53,7 @@ class Api
         return  DB::select($query, $params);
     }
 
-    public static function isTitleExists($api)
-    {
-        return count(self::select($api));
-    }
+
     public static function insert($api)
     {
         session_start();
@@ -66,10 +63,15 @@ class Api
             "action" => "insert",
         ];
         $api["project_id"] = $_SESSION["project_id"];
-        if (self::isTitleExists([
-            "api_title" => $api["api_title"],
-            "project_id" => $api["project_id"]
-        ])) {
+
+
+        if (DB::isExists(
+            "api",
+            [
+                "api_title" => $api["api_title"],
+                "project_id" => $api["project_id"]
+            ]
+        )) {
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;
@@ -93,11 +95,19 @@ class Api
             "action" => "update",
         ];
         $api["project_id"] = $_SESSION["project_id"];
-        if (self::isTitleExists([
-            "api_title" => $api["api_title"],
-            "api_id_diff" => $_SESSION["api_id"],
-            "project_id" => $api["project_id"],
-        ])) {
+
+
+        if (DB::isExists(
+            "api",
+            [
+                "api_title" => $api["api_title"],
+                "project_id" => $api["project_id"],
+            ],
+            [
+                "api_id" => $_SESSION["api_id"],
+            ]
+
+        )) {
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;
@@ -135,6 +145,7 @@ class Api
         }
         return $response;
     }
+
 }
 
 new Api();

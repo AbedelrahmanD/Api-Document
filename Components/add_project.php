@@ -2,11 +2,7 @@
 
 include_once __DIR__ . "./../autoload_register.php";
 $formAction = "insert";
-$record = [
-    "project_id" => 0,
-    "project_title" => "",
-    "project_description" => "",
-];
+$record = DB::createArray("project");
 $fetchedRecord = null;
 
 if (isset($_GET["project_id"])) {

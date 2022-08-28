@@ -122,7 +122,7 @@ function ajaxFormSubmitEventBinding() {
             }
 
             let action = form.getAttribute("action");
-            let method = form.method;
+            let method =form.getAttribute("method");
             let formData = new FormData(form);
             let fetchOptions = {
                 method: method

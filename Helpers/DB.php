@@ -73,7 +73,7 @@ class DB
         $values = implode(",", $values);
         $query = "insert into $tableName ($fields) values ($values)";
 
-        return self::execute($query, $params,true);
+        return self::execute($query, $params, true);
     }
 
     public static function select($query = "", $bindParams = [])
@@ -88,4 +88,43 @@ class DB
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
+
+    public static function isExists($tableName, $params = [], $expect = [])
+    {
+
+        $condition = "";
+        $bindParams = [];
+        foreach ($params as $field => $value) {
+            $condition .= " and $field=:$field";
+            $bindParams[$field] = $params[$field];
+        }
+
+        foreach ($expect as $field => $value) {
+            $condition .= " and $field!=:$field";
+            $bindParams[$field] = $expect[$field];
+        }
+
+
+        $query = "select * from $tableName where 1 $condition ";
+
+        $result = DB::select($query, $bindParams);
+        return count($result);
+    }
+
+    public static function getColumns($tableName)
+    {
+        $query = "SHOW columns FROM  $tableName";
+
+        return DB::select($query);
+    }
+    public static function createArray($tableName)
+    {
+        $arr = [];
+        $result = self::getColumns($tableName);
+        foreach ($result as $key => $column) {
+            $arr[$column["Field"]]  = $column["Default"];
+        }
+        return $arr;
+    }
 }
+//createarray

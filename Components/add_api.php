@@ -4,17 +4,7 @@ include_once __DIR__ . "./../autoload_register.php";
 $formAction = "insert";
 $readOnly = "";
 $methods = ["Post", "Get", "Put", "Delete"];
-$record = [
-    "api_id" => 0,
-    "project_id" => isset($_GET["project_id"]) ? $_GET["project_id"] : 0,
-    "api_title" => "",
-    "api_method" => "Post",
-    "api_url" => "",
-    "api_header" => "",
-    "api_body_type" => "FormData",
-    "api_body" => "",
-    "api_response" => "",
-];
+$record =DB::createArray("api");
 $fetchedRecord = null;
 // $projects = ProjectModel::select();
 
