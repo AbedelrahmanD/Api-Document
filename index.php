@@ -17,7 +17,7 @@ $projects = Utils::api("Project");
 
     </div>
 
-    
+
 
 
     <div id="jsProjectGrid" class="projectGrid">
@@ -34,9 +34,6 @@ $projects = Utils::api("Project");
 </div>
 
 <script>
- 
-
-    
     $(function() {
 
         $("#jsSearchProject").on("input", function() {

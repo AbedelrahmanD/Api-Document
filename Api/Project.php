@@ -1,6 +1,7 @@
 <?php
 
-include_once __DIR__ . "../../Helpers/DB.php";
+
+include_once __DIR__ . "./../autoload_register.php";
 class Project
 {
     public static $dbTable = "project";
@@ -8,7 +9,9 @@ class Project
 
     public function __construct()
     {
+
         if (isset($_REQUEST["action"])) {
+
             $response = [];
             $action = $_REQUEST["action"];
             if ($action == "insert") {
@@ -27,6 +30,7 @@ class Project
 
     public static function select($project = [])
     {
+
         $condition = "";
         $params = [];
         if (isset($project['project_id'])) {

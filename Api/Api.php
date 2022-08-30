@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . "../../Helpers/DB.php";
+include_once __DIR__ . "./../autoload_register.php";
 class Api
 {
     public static $dbTable = "api";
@@ -145,7 +145,6 @@ class Api
         }
         return $response;
     }
-
 }
 
 new Api();
