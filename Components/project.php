@@ -8,9 +8,7 @@ if (isset($_GET["project_id"])) {
 }
 ?>
 
-<div id="jsProject_<?=$project["project_id"]?>" class="jsProjectContainer projectContainer"
-title=" <?= $project['project_description'] ?>"
->
+<div id="jsProject_<?= $project["project_id"] ?>" class="jsProjectContainer projectContainer" title=" <?= $project['project_description'] ?>">
     <a class="projectInfo" href="api_list.php?project_id=<?= $project['project_id'] ?>">
         <span class="iconify" data-icon="academicons:ideas-repec"></span>
         <h3 class="jsProjectTitle">
@@ -21,7 +19,7 @@ title=" <?= $project['project_description'] ?>"
         </p>
     </a>
 
-    <a class="projectEdit" data-project_id=<?= $project["project_id"] ?> data-popup data-popup-title="Edit <?= $project['project_title'] ?>" href="Components/add_project.php?project_id=<?= $project['project_id'] ?>">
+    <a class="projectEdit" data-project_id=<?= $project["project_id"] ?> data-popup data-popup-title="Edit <?= $project['project_title'] ?>" href="Components/project_add.php?project_id=<?= $project['project_id'] ?>">
         <span class="iconify" data-icon="fa-solid:pen"></span>
     </a>
 </div>

@@ -1,34 +1,13 @@
 <?php
 
-
 include_once __DIR__ . "./../autoload_register.php";
-class Project
+class Project extends RestApi
 {
     public static $dbTable = "project";
 
 
-    public function __construct()
-    {
 
-        if (isset($_REQUEST["action"])) {
-
-            $response = [];
-            $action = $_REQUEST["action"];
-            if ($action == "insert") {
-                $response = self::insert($_POST);
-            } else  if ($action == "update") {
-                $response = self::update($_POST);
-            } else if ($action == "delete") {
-                $response = self::delete();
-            } else if ($action == "select") {
-                $response = self::select($_POST);
-            }
-
-            echo json_encode($response);
-        }
-    }
-
-    public static function select($project = [])
+    public  function select($project = [])
     {
 
         $condition = "";
@@ -52,7 +31,7 @@ class Project
         return  DB::select($query, $params);
     }
 
-    public static function insert($project)
+    public  function insert($project)
     {
         $response = [
             "status" => "error",
@@ -75,7 +54,7 @@ class Project
         return $response;
     }
 
-    public static function update($project)
+    public  function update($project)
     {
         session_start();
 
@@ -106,7 +85,7 @@ class Project
         return $response;
     }
 
-    public static function delete()
+    public  function delete()
     {
         session_start();
         $response = [

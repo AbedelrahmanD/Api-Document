@@ -6,5 +6,5 @@ class Config
     public static $username = "root";
     public static $password = "root";
     public static $dbName = "api_doc";
-    public static $baseUrl = "https://localhost/Api-Document/";
+    public static $baseUrl = "https://localhost/api_doc/";
 }

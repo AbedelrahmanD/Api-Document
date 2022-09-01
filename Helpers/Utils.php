@@ -24,6 +24,7 @@ class Utils
             echo curl_error($ch);
         }
 
+
         return json_decode($result, true);
     }
 }

@@ -12,26 +12,26 @@ $_SESSION["project_id"] = $project["project_id"];
 ?>
 
 <div class="apiContainer contentcontainer">
-        <div class="apiList">
-            <div class="searchApi">
-                <a data-popup data-popup-title="Add Api For <?= $project['project_title'] ?>" class="projectAdd" href="Components/add_api.php?project_id=<?= $project['project_id'] ?>">
-                    <span class="iconify" data-icon="carbon:add"></span>
-                </a>
-                <div class="cmInputContainer">
-                    <input type="text" id="jsSearchApi" class="cmInput" placeholder=" ">
-                    <label class="cmInputLabel">Search...</label>
-                </div>
-
+    <div class="apiList">
+        <div class="searchApi">
+            <a data-popup data-popup-title="Add Api For <?= $project['project_title'] ?>" class="projectAdd" href="Components/api_add.php?project_id=<?= $project['project_id'] ?>">
+                <span class="iconify" data-icon="carbon:add"></span>
+            </a>
+            <div class="cmInputContainer">
+                <input type="text" id="jsSearchApi" class="cmInput" placeholder=" ">
+                <label class="cmInputLabel">Search...</label>
             </div>
 
-            <div id="jsApiList">
-                <?php
-                foreach ($apis as $api) {
-                    include "Components/api.php";
-                }
-                ?>
-            </div>
-            </div>
+        </div>
+
+        <div id="jsApiList">
+            <?php
+            foreach ($apis as $api) {
+                include "Components/api.php";
+            }
+            ?>
+        </div>
+    </div>
 
 
 

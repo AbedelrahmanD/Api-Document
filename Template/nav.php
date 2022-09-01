@@ -1,10 +1,6 @@
 <?php
 
 include_once "header.php";
-include_once __DIR__ . "./../autoload_register.php";
-
-
-
 
 ?>
 <div class="nav">

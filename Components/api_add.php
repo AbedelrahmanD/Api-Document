@@ -4,7 +4,7 @@ include_once __DIR__ . "./../autoload_register.php";
 $formAction = "insert";
 $readOnly = "";
 $methods = ["Post", "Get", "Put", "Delete"];
-$record =DB::createArray("api");
+$record = DB::createArray("api");
 $fetchedRecord = null;
 // $projects = ProjectModel::select();
 
@@ -39,6 +39,12 @@ if (isset($_GET["isReadOnly"])) {
         <input <?= $readOnly ?> name="api_title" value="<?= $record['api_title'] ?>" data-type="text" data-type-message="Required" autocomplete="off" type="text" class="cmInput" placeholder=" ">
         <label class="cmInputLabel">Title</label>
     </div>
+
+    <div class="cmInputContainer fullWidth">
+        <textarea <?= $readOnly ?> class="cmInput" name="api_desc" cols="30" rows="5" placeholder=" "><?= $record['api_desc'] ?></textarea>
+        <label class="cmInputLabel">Description</label>
+    </div>
+
 
     <div class="apiUrlContainer fullWidth">
         <select <?= $readOnly ?> name="api_method">
@@ -110,22 +116,22 @@ if (isset($_GET["isReadOnly"])) {
     function tryApi() {
         let url = $("[name=api_url]").val();
         let method = $("[name=api_method]").val();
-        let headers= $("[name=api_header]").val();
+        let headers = $("[name=api_header]").val();
         let body = $("[name=api_body]").val();
         let type = $("[name=api_body_type]:checked").val();
-        let contentType="application/json";
-        if (type == "FormData" && body!="") {
+        let contentType = "application/json";
+        if (type == "FormData" && body != "") {
             body = JSON.parse(body);
-            contentType=false;
+            contentType = false;
         }
-        if(headers!=""){
-            headers=JSON.parse(headers);
+        if (headers != "") {
+            headers = JSON.parse(headers);
         }
         $("[data-form-loader]").show();
         $.ajax({
             type: method,
             url: url,
-            headers:headers,
+            headers: headers,
             data: body,
             // contentType:contentType,
             // processData:false,

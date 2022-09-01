@@ -7,7 +7,7 @@ $projects = Utils::api("Project");
 ?>
 <div id="jsProjects" class="contentcontainer">
     <div class="searchProject">
-        <a data-popup data-popup-title="Add Project" class="projectAdd" href="Components/add_project.php">
+        <a data-popup data-popup-title="Add Project" class="projectAdd" href="Components/project_add.php">
             <span class="iconify" data-icon="carbon:add"></span>
         </a>
         <div class="cmInputContainer">

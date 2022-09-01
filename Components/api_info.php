@@ -16,9 +16,16 @@ if (isset($_GET["api_id"])) {
         <div>
             <?= $record['api_title'] ?>
         </div>
-
-
     </div>
+
+    <?php if ($record['api_desc'] != "") : ?>
+        <div class="infoContainer fullWidth">
+            <label>Description</label>
+            <div class="pre">
+                <?= $record['api_desc'] ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <div class="apiUrlContainer fullWidth">
         <div class="infoContainer ">
@@ -83,9 +90,9 @@ if (isset($_GET["api_id"])) {
 </div>
 
 
-<a class="apiEdit" data-popup data-popup-title="Edit Api " href="Components/add_api.php?api_id=<?= $_GET['api_id'] ?>">
+<a class="apiEdit" data-popup data-popup-title="Edit Api " href="Components/api_add.php?api_id=<?= $_GET['api_id'] ?>">
     <span class="iconify" data-icon="fa-solid:pen"></span>
 </a>
-<a class="apiTry" data-popup data-popup-title="Try Api " href="Components/add_api.php?api_id=<?= $_GET['api_id'] ?>&action=try">
+<a class="apiTry" data-popup data-popup-title="Try Api " href="Components/api_add.php?api_id=<?= $_GET['api_id'] ?>&action=try">
     <span class="iconify" data-icon="fa-solid:play"></span>
 </a>

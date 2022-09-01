@@ -1,29 +1,12 @@
 <?php
 include_once __DIR__ . "./../autoload_register.php";
-class Api
+class Api extends RestApi
 {
     public static $dbTable = "api";
 
 
-    public function __construct()
-    {
-        if (isset($_REQUEST["action"])) {
-            $response = [];
-            $action = $_REQUEST["action"];
-            if ($action == "insert") {
-                $response = self::insert($_POST);
-            } else  if ($action == "update") {
-                $response = self::update($_POST);
-            } else if ($action == "delete") {
-                $response = self::delete();
-            } else if ($action == "select") {
-                $response = self::select($_POST);
-            }
 
-            echo json_encode($response);
-        }
-    }
-    public static function select($api = null)
+    public  function select($api = null)
     {
 
         $condition = "";
@@ -54,7 +37,7 @@ class Api
     }
 
 
-    public static function insert($api)
+    public  function insert($api)
     {
         session_start();
         $response = [
@@ -86,7 +69,7 @@ class Api
         return $response;
     }
 
-    public static function update($api)
+    public  function update($api)
     {
         session_start();
         $response = [
@@ -125,7 +108,7 @@ class Api
         return $response;
     }
 
-    public static function delete()
+    public  function delete()
     {
         session_start();
         $response = [

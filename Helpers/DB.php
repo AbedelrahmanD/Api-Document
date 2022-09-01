@@ -4,6 +4,7 @@ class DB
 {
     public static function getConnection()
     {
+
         $conn = new PDO("mysql:host=" . Config::$host . ";dbname=" . Config::$dbName . "", Config::$username, Config::$password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
