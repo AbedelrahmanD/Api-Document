@@ -100,7 +100,7 @@ if (isset($_GET["isReadOnly"])) {
     <?php elseif ($fetchedRecord == null) : ?>
         <button class="cmButton fullWidth" type="submit">Submit</button>
     <?php else : ?>
-        <div class="buttonsContainer">
+        <div class="buttonsContainer fullWidth">
             <button class="cmButton" type="submit">Update</button>
             <button class="cmButton cmButtonSecondary" onclick="deleteRecord()" type="button">Delete</button>
         </div>
