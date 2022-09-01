@@ -187,6 +187,7 @@ p {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    width: 100%;
 }
 
 .apiTry,
@@ -531,14 +532,14 @@ textarea.cmInput {
     position: relative;
 }
 
-.apiForm {
+.cmForm {
     max-width: 70vw;
     margin: auto;
 }
 
-.apiForm .cmInputContainer,
-.apiForm .apiUrlContainer,
-.apiForm .bodyTypeContainer {
+.cmForm .cmInputContainer,
+.cmForm .apiUrlContainer,
+.cmForm .bodyTypeContainer {
     margin: 0.5rem 0;
 
 }

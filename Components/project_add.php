@@ -21,14 +21,14 @@ if (isset($_GET["project_id"])) {
 <form class="cmForm" id="jsProjectForm" action="Api/Project.php?action=<?= $formAction ?>" method="post" data-form="projectFormSubmitDone">
 
     <div data-form-message></div>
-    <div class="cmInputContainer">
+    <div class="cmInputContainer fullWidth">
         <input data-type="text" data-type-message="Required" autocomplete="off" type="text" class="cmInput" placeholder=" " name="project_title" value="<?= $record['project_title'] ?>">
         <label class="cmInputLabel">Title</label>
     </div>
 
 
 
-    <div class="cmInputContainer">
+    <div class="cmInputContainer fullWidth">
         <textarea class="cmInput" placeholder=" " name="project_description" cols="30" rows="10"><?= $record['project_description'] ?></textarea>
         <label class="cmInputLabel">Description</label>
     </div>
@@ -36,10 +36,10 @@ if (isset($_GET["project_id"])) {
 
 
     <?php if ($fetchedRecord == null) : ?>
-        <button class="cmButton" type="submit">Submit</button>
+        <button class="cmButton fullWidth" type="submit">Submit</button>
 
     <?php else : ?>
-        <div class="buttonsContainer">
+        <div class="buttonsContainer fullWidth">
             <button class="cmButton " type="submit">Update</button>
             <button class="cmButton cmButtonSecondary" onclick="deleteRecord()" type="button">Delete</button>
         </div>
