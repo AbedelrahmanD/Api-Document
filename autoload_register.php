@@ -13,3 +13,8 @@ spl_autoload_register(function ($class_name) {
         }
     }
 });
+
+if (strpos(Config::$baseUrl, $_SERVER["HTTP_HOST"]) == false) {
+    echo "change basic url in config.php";
+    exit;
+}

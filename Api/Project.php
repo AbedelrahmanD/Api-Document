@@ -66,7 +66,7 @@ class Project extends RestApi
         if (DB::isExists(
             "project",
             ["project_title" => $project["project_title"]],
-            ["project_id" => $_SESSION["project_id"]],
+            ["project_id" => $_SESSION["project_id"]]
         )) {
 
             $response["status"] = "error";
