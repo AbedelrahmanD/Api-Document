@@ -1,18 +1,19 @@
 <?php
+
 include_once __DIR__ . "./../autoload_register.php";
-class Utils
-{
+
+class Utils {
 
 
-    public static function api($apiFile, $data = [])
-    {
+
+    public static function api($apiFile, $data = []) {
 
         if (!isset($data["action"])) {
             $data["action"] = "select";
         }
 
         $url = Config::$baseUrl . "Api/$apiFile.php";
-        $ch =  curl_init();
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -27,4 +28,5 @@ class Utils
 
         return json_decode($result, true);
     }
+
 }

@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . "./../autoload_register.php";
+
 class Api extends RestApi
 {
     public static $dbTable = "api";
@@ -84,10 +85,10 @@ class Api extends RestApi
             "api",
             [
                 "api_title" => $api["api_title"],
-                "project_id" => $api["project_id"],
+                "project_id" => $api["project_id"]
             ],
             [
-                "api_id" => $_SESSION["api_id"],
+                "api_id" => $_SESSION["api_id"]
             ]
 
         )) {

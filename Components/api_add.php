@@ -95,7 +95,7 @@ if (isset($_GET["isReadOnly"])) {
 
     if (isset($_GET["action"]) && $_GET["action"] == "try") :
     ?>
-        <button onclick="tryApi()" class="cmButton" type="button">Try</button>
+        <button onclick="tryApi()" class="cmButton fullWidth" type="button">Try</button>
 
     <?php elseif ($fetchedRecord == null) : ?>
         <button class="cmButton fullWidth" type="submit">Submit</button>
@@ -156,6 +156,7 @@ if (isset($_GET["isReadOnly"])) {
             function(data, textStatus, jqXHR) {
                 data = JSON.parse(data);
                 $(`#jsApi_${data.id}`).remove();
+                $("#jsApiInfo").html("");
                 $("#jsClosePopup").trigger("click");
                 triggerFirstApi();
             },

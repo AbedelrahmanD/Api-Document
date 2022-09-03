@@ -1,34 +1,36 @@
 <?php
 
-class DB
-{
-    public static function getConnection()
-    {
+class DB {
+
+    public static function show() {
+        echo "DB class is here: <br>";
+    }
+
+    public static function getConnection() {
 
         $conn = new PDO("mysql:host=" . Config::$host . ";dbname=" . Config::$dbName . "", Config::$username, Config::$password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     }
 
-    public static function execute($query = "", $bindParams = [], $getInsertedId = false)
-    {
+    public static function execute($query = "", $bindParams = [], $getInsertedId = false) {
+
 
         $conn = DB::getConnection();
         $stmt = $conn->prepare($query);
         foreach ($bindParams as $key => $param) {
             $stmt->bindParam(":$key", $bindParams["$key"]);
         }
-
+      
         $result = $stmt->execute();
+
         if ($getInsertedId) {
             return $conn->lastInsertId();
         }
         return $result;
     }
 
-
-    public static function delete($tableName, $where = [])
-    {
+    public static function delete($tableName, $where = []) {
 
         $deleteWhere = [];
         foreach ($where as $field => $value) {
@@ -38,8 +40,8 @@ class DB
         $query = "delete from $tableName where 1 and $deleteWhere";
         return self::execute($query, $where);
     }
-    public static function update($tableName, $params = [], $where = [])
-    {
+
+    public static function update($tableName, $params = [], $where = []) {
         $fields = [];
 
         foreach ($params as $field => $value) {
@@ -58,8 +60,8 @@ class DB
         return self::execute($query, array_merge($params, $where));
     }
 
-    public static function insert($tableName, $params = [])
-    {
+    public static function insert($tableName, $params = []) {
+
         $fields = [];
         $values = [];
         foreach ($params as $field => $value) {
@@ -73,8 +75,7 @@ class DB
         return self::execute($query, $params, true);
     }
 
-    public static function select($query = "", $bindParams = [])
-    {
+    public static function select($query = "", $bindParams = []) {
 
         $conn = DB::getConnection();
         $stmt = $conn->prepare($query);
@@ -86,8 +87,7 @@ class DB
         return $stmt->fetchAll();
     }
 
-    public static function isExists($tableName, $params = [], $expect = [])
-    {
+    public static function isExists($tableName, $params = [], $expect = []) {
 
         $condition = "";
         $bindParams = [];
@@ -108,20 +108,21 @@ class DB
         return count($result);
     }
 
-    public static function getColumns($tableName)
-    {
+    public static function getColumns($tableName) {
         $query = "SHOW columns FROM  $tableName";
 
         return DB::select($query);
     }
-    public static function createArray($tableName)
-    {
+
+    public static function createArray($tableName) {
         $arr = [];
         $result = self::getColumns($tableName);
         foreach ($result as $key => $column) {
-            $arr[$column["Field"]]  = $column["Default"];
+            $arr[$column["Field"]] = $column["Default"];
         }
         return $arr;
     }
+
 }
+
 //createarray

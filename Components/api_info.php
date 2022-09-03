@@ -77,7 +77,7 @@ if (isset($_GET["api_id"])) {
         <div class="infoContainer w50">
             <label>Response</label>
             <div class="pre">
-                <?= $record['api_response'] ?>
+                <?= htmlspecialchars($record['api_response']) ?>
             </div>
             <div class="copy" data-copy="<?= str_replace('"', '&quot;', $record['api_response']) ?>">
                 <span class="iconify" data-icon="akar-icons:copy"></span>

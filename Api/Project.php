@@ -1,14 +1,12 @@
 <?php
 
 include_once __DIR__ . "./../autoload_register.php";
-class Project extends RestApi
-{
+
+class Project extends RestApi {
+
     public static $dbTable = "project";
 
-
-
-    public  function select($project = [])
-    {
+    public function select($project = []) {
 
         $condition = "";
         $params = [];
@@ -28,17 +26,16 @@ class Project extends RestApi
         }
         $query = "select * from project where 1 $condition order by project_id desc ";
 
-        return  DB::select($query, $params);
+        return DB::select($query, $params);
     }
 
-    public  function insert($project)
-    {
+//
+    public function insert($project) {
         $response = [
             "status" => "error",
             "message" => "Error, Try Again Later",
             "action" => "insert",
         ];
-
 
         if (DB::isExists("project", ["project_title" => $project["project_title"]])) {
             $response["status"] = "error";
@@ -54,8 +51,8 @@ class Project extends RestApi
         return $response;
     }
 
-    public  function update($project)
-    {
+//
+    public function update($project) {
         session_start();
 
         $response = [
@@ -63,20 +60,25 @@ class Project extends RestApi
             "message" => "Error, Try Again Later",
             "action" => "update",
         ];
+
+       
+
         if (DB::isExists(
-            "project",
-            ["project_title" => $project["project_title"]],
-            ["project_id" => $_SESSION["project_id"]]
-        )) {
+                        "project",
+                        ["project_title" => $project["project_title"]],
+                        ["project_id" => $_SESSION["project_id"]]
+                )) {
 
             $response["status"] = "error";
             $response["message"] = "Title Already Exists";
             return $response;
         }
+
         $where = [
             "project_id" => $_SESSION["project_id"]
         ];
-        $result =  DB::update(self::$dbTable, $project, $where);
+
+        $result = DB::update(self::$dbTable, $project, $where);
         if ($result >= 0) {
             $response["status"] = "success";
             $response["message"] = "Updated Successfully";
@@ -85,8 +87,8 @@ class Project extends RestApi
         return $response;
     }
 
-    public  function delete()
-    {
+//
+    public function delete() {
         session_start();
         $response = [
             "status" => "error",
@@ -97,7 +99,7 @@ class Project extends RestApi
         $where = [
             "project_id" => $_SESSION["project_id"],
         ];
-        $result =   DB::delete(self::$dbTable, $where);
+        $result = DB::delete(self::$dbTable, $where);
         if ($result > 0) {
             $response["status"] = "success";
             $response["message"] = "Deleted Successfullt";
@@ -105,6 +107,7 @@ class Project extends RestApi
         }
         return $response;
     }
+
 }
 
 new Project();
