@@ -1,5 +1,4 @@
 <?php
-
 include_once __DIR__ . "./../autoload_register.php";
 
 if (isset($_GET["api_id"])) {
@@ -54,12 +53,14 @@ if (isset($_GET["api_id"])) {
         </div>
     <?php endif; ?>
 
-    <div class="infoContainer fullWidth">
-        <label>Body Type</label>
-        <div>
-            <?= $record['api_body_type'] ?>
+    <?php if ($record['api_method'] == "Post") : ?>
+        <div class="infoContainer fullWidth">
+            <label>Body Type</label>
+            <div>
+                <?= $record['api_body_type'] ?>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 
     <div class="apiBodyResponseContainer fullWidth">
         <div class="infoContainer w50">

@@ -141,7 +141,8 @@ if (isset($_GET["isReadOnly"])) {
 
             },
             error: function(request, status, error) {
-                alert(request.responseText);
+                let message=request.statusText;
+                alert(message);
                 $("[data-form-loader]").hide();
             }
         });
