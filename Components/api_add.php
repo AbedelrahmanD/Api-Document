@@ -27,13 +27,6 @@ if (isset($_GET["isReadOnly"])) {
 
 <form class="cmForm apiForm" id="jsApiForm" action="Api/Api.php?action=<?= $formAction ?>" method="post" data-form="apiFormSubmitDone">
     <div data-form-message></div>
-    <!-- <div style="display: none;">
-        <select name="project_id" class="fullWidth">
-            <?php foreach ($projects as $project) : ?>
-                <option <?= $project['project_id'] == $record['project_id'] ? 'selected' : '' ?> value="<?= $project['project_id'] ?>"><?= $project['project_title'] ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div> -->
 
     <div class="cmInputContainer fullWidth">
         <input <?= $readOnly ?> name="api_title" value="<?= $record['api_title'] ?>" data-type="text" data-type-message="Required" autocomplete="off" type="text" class="cmInput" placeholder=" ">

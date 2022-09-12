@@ -6,7 +6,7 @@ class Utils {
 
 
 
-    public static function api($apiFile, $data = []) {
+    public static function api($apiFile, $data = [],$debug=false) {
 
         if (!isset($data["action"])) {
             $data["action"] = "select";
@@ -21,6 +21,12 @@ class Utils {
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         $result = curl_exec($ch);
+        if($debug){
+            var_dump($url);
+            echo "<br>";
+            var_dump($result);
+        }
+      
         if (curl_errno($ch)) {
             echo curl_error($ch);
         }
